@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { noHomeroValidator } from '../../shared/custom-validators';
 
 @Component({
   selector: 'app-reactive-forms',
@@ -16,12 +17,10 @@ export class ReactiveFormsComponent {
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      email: [null, [Validators.required, Validators.email]],
+      email: [null, [Validators.required, Validators.email, noHomeroValidator]],
       password: [null, [Validators.required, Validators.minLength(6)]],
-      rememberMe: [],
+      rememberMe: [false],
     });
-
-    console.log(this.loginForm);
   }
 
   get emailControl() {
@@ -38,5 +37,17 @@ export class ReactiveFormsComponent {
 
   get emailErrors() {
     return this.emailControl?.errors;
+  }
+
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      alert('El form es invalido!');
+      this.loginForm.markAllAsTouched();
+      console.log('AQUI');
+    } else {
+      alert('Los datos se enviaron!');
+      console.log(this.loginForm.value);
+      this.loginForm.reset();
+    }
   }
 }

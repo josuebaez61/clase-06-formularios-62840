@@ -4,7 +4,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-6">
-            <form [formGroup]="loginForm">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label"
                   >Email address</label
@@ -27,7 +27,8 @@
                 >
                   @if (emailControl?.hasError('required')) { Este campo es
                   requerido } @else if (emailControl?.hasError('email')) { Este
-                  no es un correo válido }
+                  no es un correo válido } @else if
+                  (emailControl?.hasError("noHomero")) { No se admiten homeros }
                 </div>
               </div>
               <div class="mb-3">
