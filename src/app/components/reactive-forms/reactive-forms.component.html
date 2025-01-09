@@ -1,0 +1,65 @@
+<div class="bg-primary">
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <form [formGroup]="loginForm">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  autocomplete="false"
+                  formControlName="email"
+                  type="email"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid': emailControlIsInvalid,
+                    'is-valid': emailControlIsValid
+                  }"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                />
+                <div
+                  *ngIf="emailControl?.touched"
+                  class="form-text text-danger"
+                >
+                  @if (emailControl?.hasError('required')) { Este campo es
+                  requerido } @else if (emailControl?.hasError('email')) { Este
+                  no es un correo válido }
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label"
+                  >Password</label
+                >
+                <input
+                  formControlName="password"
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                />
+              </div>
+              <div class="mb-3 form-check">
+                <input
+                  formControlName="rememberMe"
+                  type="checkbox"
+                  class="form-check-input"
+                  id="exampleCheck1"
+                />
+                <label class="form-check-label" for="exampleCheck1"
+                  >Remember me</label
+                >
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+          <div class="col-6">
+            <pre>{{ loginForm.value | json }}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
